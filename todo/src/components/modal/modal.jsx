@@ -16,8 +16,8 @@ const ModalComponent=(props)=> {
           <Button variant="secondary" onClick={props.onHide}>
             Close
           </Button>
-          <Button variant="primary" onClick={props.onHide}>
-            Save Changes
+          <Button variant="primary" onClick={()=>props.action(...props.args)}>
+            {props.actionText}
           </Button>
         </Modal.Footer>
       </Modal>

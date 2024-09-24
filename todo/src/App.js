@@ -1,7 +1,7 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BsPencil,BsTrash,BsPlusCircleFill} from 'react-icons/bs';
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import CreateModal from './components/modal/create-modal';
 import UpdateModal from './components/modal/edit-modal';
 import DeleteModal from './components/modal/delete-modal';
@@ -24,12 +24,13 @@ const Options=(props)=>{
 }
 
 function App() {
-  const starting=['cook','clean','bath','gardening']
-  const [items,setItems] =useState([])
-  if (!starting.some(item => items.includes(item))) {
-    setItems(prevItems => [...prevItems, ...starting]);
-  }
-
+  // const starting=['cook','clean','bath','gardening']
+  // const [items,setItems] =useState([])
+  // if (!starting.some(item => items.includes(item))) {
+  //   setItems(prevItems => [...prevItems, ...starting]);
+  // }
+  const [items, setItems] = useState(['sleep']);
+  setItems([...items, 'code']);
   //create
   const [showCreateModal,setShowCreateModal] = useState(false)
   const openCreateModal = ()=>{setShowCreateModal(true)}
@@ -54,16 +55,16 @@ function App() {
             {
               items.map((item,index)=>(
                 <TodoItem key={index}>
-                  {item}
-                  <Options index={index} update={openUpdateModal} delete={openDeleteModal} />
-            </TodoItem>
+                    {item}
+                    <Options index={index} update={openUpdateModal} delete={openDeleteModal} />
+                </TodoItem>
 
               ))
             }
         </ul>
-        <CreateModal  show={showCreateModal} onHide={closeCreateModal} heading="Create Item" />
-        <UpdateModal  show={showUpdateModal} onHide={closeUpdateModal} heading="Update Item" />
-        <DeleteModal  show={showDeleteModal} onHide={closeDeleteModal} heading="Delete Item 😐" />
+        <CreateModal  show={showCreateModal} onHide={closeCreateModal} heading="Create Item" action={()=>{}} actionText="add" args={[]} />
+        <UpdateModal  show={showUpdateModal} onHide={closeUpdateModal} heading="Update Item" action={()=>{}} actionText="update" args={[]} />
+        <DeleteModal  show={showDeleteModal} onHide={closeDeleteModal} heading="Delete Item 😐" action={()=>{}} actionText="delete" args={[]} />
     </div>
   );
 }
